@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <title>Hello World!</title>
+    <style type="text/css">
+    	body{
+    		font-family: Georgia;
+    	}
+    	div{
+    		padding-bottom: 20px;
+    	}
+    	p{
+    		padding-bottom: 5px;
+    		margin-bottom: 0;
+    	}
+    	input{
+    		width: 400px;
+    	}
+    </style>
+  </head>
+  <body>
+
+  	<div id="app-1">
+  		{{ message }}
+  	</div>
+
+  	<div id="app-2">
+  		<span v-bind:title="date">
+  			Hover your mouse over me for a few seconds to see date
+  		</span>
+  	</div>
+
+  	<div id="app-3">
+  		<p v-if="bool">
+  			If bool is True, you see me
+  		</p>
+  		<button v-on:click="ToogleBool">Toogle bool</button>
+  	</div>
+
+ 	<div id="app-4">
+ 		<ol>
+ 			<li v-for="todo in todos">
+ 				{{ todo.text }}
+ 			</li>
+ 		</ol>
+ 	</div>
+
+ 	<div id="app-5">
+ 		<p> {{ message }} </p>
+ 		<button v-on:click="reverseText">Reverse Text</button>
+ 	</div>
+
+ 	<div id="app-6">
+ 		<p> {{ message }} </p>
+ 		<input v-model="message"></input>
+ 	</div>	
+
+ 	<div id="app-7">
+ 		<ol>
+ 			<todo-item
+ 				v-for="item in items"
+ 				v-bind:todo="item"
+ 				v-bind:key="item.id" 
+ 			>
+ 			</todo-item>
+ 		</ol>
+ 	</div>
+
+	<script src="https://unpkg.com/vue"></script>
+	<script type="text/javascript">
+	    var HelloWorld = new Vue({
+	    	el : "#app-1",
+	    	data : {
+	    		message : "Hello World!"
+	    	}
+
+	    })
+
+	    var HoverDate = new Vue({
+	    	el : "#app-2",
+	    	data: {
+	    		date : "Now:" + new Date()
+	    	}
+	    })
+
+	    var TestBool =  new Vue ({
+	    	el : "#app-3",
+	    	data : {
+	    		bool : true 	    		
+	    	},
+	    	methods :{
+	    		ToogleBool: function(){
+	    			this.bool = !this.bool;
+	    			
+	    		}
+	    	}
+	    })
+
+	    var TodoList = new Vue({
+	    	el : "#app-4",
+	    	data : {
+	    		todos : [
+	    			{ text : "Learn vue js" },
+	    			{ text : "Create API for own blog" },
+	  				{ text : "Build awesome app" }
+
+	    		]
+	    	}
+	    	//TodoList.todos.push({ text: 'New element' })
+	    })
+
+	    var TextReverse = new Vue({
+	    	el : "#app-5",
+	    	data : {
+	    		message : "My message"
+	    	},	    	
+	    	methods : {
+	    		reverseText : function(){
+	    			this.message = this.message.split('').reverse().join('')
+	    		}
+	    	}
+	    })
+
+	    var AwesomeInput = new Vue({
+	    	el : "#app-6",
+	    	data : {
+	    		message : "Awesome Text Field, I Fucking Love This"
+	    	}
+	    })
+
+
+	    Vue.component('todo-item',{
+	    	props : ['todo'],
+	    	template: "<li>{{ todo.text }}<li>"
+	    })
+	    var Components = new Vue ({
+	    	el : "#app-7",
+	    	data : {
+	    		items : [
+	    			{ id : 0, text : "item" },
+	    			{ id : 1, text : "item" },
+	    			{ id : 2, text : "item" }
+	    		]
+	    	}
+
+	    })
+
+
+	</script>
+  </body>
+</html>
+
