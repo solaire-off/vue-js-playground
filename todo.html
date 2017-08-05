@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Todo List - Vue Js</title>
+    <style type="text/css">
+    	body{
+    		font-family: Georgia;
+    	}
+    	div{
+    		padding-bottom: 20px;
+    	}
+    	p{
+    		padding-bottom: 5px;
+    		margin-bottom: 0;
+    	}
+    	input{
+    		width: 400px;
+    	}
+    	li{
+    		padding-bottom: 5px;
+    	}
+    </style>
+  </head>
+  <body>
+
+
+ 	<div id="app">
+ 		<input v-model="newItem"  @keyup.enter="addItem"></input> <button @click="clearItem">Clear</button>
+ 		<ol>
+ 			<li v-for="(todo,index) in todos">
+ 				{{ todo.text }} <button @click="deleteItem(index)">delete</button>
+ 			</li>
+ 		</ol>
+ 	</div>
+
+
+	<script src="https://unpkg.com/vue"></script>
+	<script type="text/javascript">
+
+	    var TodoList = new Vue({
+	    	el : "#app",
+	    	data : {
+	    		newItem : "Example Task",
+	    		todos : []
+	    	},
+	    	methods : {
+	    		addItem : function(){
+	    			var item = this.newItem.trim();
+	    			if (item) {
+	    				this.newItem = ""
+	    				this.todos.push({
+	    					text : item
+	    				})
+	    			}
+	    		},
+	    		deleteItem : function(index){
+	    			this.$delete(this.todos, index);
+	    		},
+	    		clearItem : function(){
+	    			this.todos = []
+	    		}
+
+	    	}
+	    	
+	    })
+
+	</script>
+  </body>
+</html>
