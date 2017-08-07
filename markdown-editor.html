@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Markdown editor - Vue Js</title>
+    <style type="text/css">
+    	body{
+    		font-family: Georgia;
+    	}
+    	p{
+    		padding-bottom: 5px;
+    		margin-bottom: 0;
+    	}
+    	input{
+    		width: 400px;
+    	}
+    	li{
+    		padding-bottom: 5px;
+    	}
+    	.md{
+    		display: flex;
+    		justify-content:center;
+    	}
+    	.md__in{
+    		width: 40%;
+    		height: 100%;
+    	}
+    	.md__out{
+    		width: 59%;
+    		padding-left: 1%;
+    		height: 100%;
+    	}
+    </style>
+   
+  </head>
+  <body>
+
+
+ 	<div class="md" id="app">
+ 		<textarea class="md__in" v-model="normalText"  @keyup="markedThis"></textarea>
+ 		<div id="out" class="md__out" v-html="markedText"></div>
+ 	</div>
+
+	<script src="https://unpkg.com/vue"></script>
+	<script src="https://unpkg.com/marked@0.3.6"></script>
+      <script type="text/javascript">
+	    var SimpleMarked = new Vue({
+	    	el : "#app",
+	    	data : {
+	    		normalText : "# Welcome to Markdown Editor ",
+	    		markedText : ""
+	    	},
+	    	methods : {
+	    		markedThis : function(){
+	    			this.markedText  = marked(this.normalText)
+	    			}
+	    		},
+	    	created: function () {
+    			this.markedThis()
+  				}	
+	    })
+	</script>
+  </body>
+</html>
