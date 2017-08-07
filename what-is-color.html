@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>Color choose - Vue Js</title>
+    <style type="text/css">
+    	body{
+    		font-family: 'Arvo', serif;
+            color: white;
+    	}
+    	p{
+    		padding-bottom: 5px;
+    		margin-bottom: 0;
+    	}
+    	input{
+    		width: 50px;
+    	}
+    	li{
+    		padding-bottom: 5px;
+    	}
+        #app{
+            background: black;
+            width: 100%;
+            height:100%;
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+        .choose{
+            margin: 60px auto;
+            width: 550px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1{
+            font-size: 98px;
+            margin-bottom: 10px;
+        }
+        select{
+            margin-top: 10px;
+        }
+        label{
+            font-size: 38px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+   
+  </head>
+  <body>
+
+
+ 	<div id="app" :style="{ background: selected }">
+        <div class="choose">
+            <h1>Hello World!</h1>
+            <label>What is Color?</label>
+     		<select v-model="selected">
+                <option v-for="item in colors" :value="item.color">{{ item.name }}</option>
+            </select>
+        </div>
+ 	</div>
+
+	<script src="https://unpkg.com/vue@2.4.2"></script>
+	
+    <script type="text/javascript">
+	    var whatIsColor = new Vue({
+	    	el : "#app",
+	    	data : {
+	    		colors : [
+                    { name : "Grey", color: "#313131"},
+                    { name: "Black", color : "#131313"},
+                ],
+                selected : ""
+	    	},
+	    	created: function () {
+                var randomColor = Math.floor(Math.random() * this.colors.length);
+                this.selected = this.colors[randomColor].color;
+            } 
+	    		
+	    })
+	</script>
+  </body>
+</html>
